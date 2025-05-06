@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
 @Database(entities = {Contacts.class},version = 1)
 public abstract class ContactDatabase extends RoomDatabase {
 
-    public abstract class ContactDAO getContactDAO();
+    public abstract ContactDAO getContactDAO();
 
     private static ContactDatabase dbInstance; // Singleton Pattern
 

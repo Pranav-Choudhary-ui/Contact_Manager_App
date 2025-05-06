@@ -25,7 +25,7 @@ public class MyViewModel extends AndroidViewModel {
         return allContacts;
     }
 
-    public void addContact(Contacts contact){
+    public void addNewContact(Contacts contact){
         myRepository.addContact(contact);
     }
 

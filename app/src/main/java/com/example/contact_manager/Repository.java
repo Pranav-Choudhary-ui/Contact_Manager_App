@@ -13,31 +13,33 @@ import java.util.concurrent.Executors;
 public class Repository {
 
     private final ContactDAO contactDAO;
-    ExecutorService executor;
+    private final ExecutorService executorService;
     Handler handler;
 
+
     public Repository(Application application) {
-        this.contactDAO = contactDAO;
-
         ContactDatabase contactDatabase = ContactDatabase.getInstance(application);
+        this.contactDAO = contactDatabase.getContactDAO();
 
-        executor = Executors.newSingleThreadExecutor();
+
+
+        executorService = Executors.newSingleThreadExecutor();
         handler = new Handler(Looper.getMainLooper());
     }
 
     public void addContact(Contacts contact){
 
 
-        executor.execute(new Runnable() {
+
+        executorService.execute(new Runnable() {
             @Override
             public void run() {
                 contactDAO.insert(contact);
             }
         });
-        contactDAO.insert(contact);
     }
     public void deleteContact(Contacts contact){
-        executor.execute(new Runnable() {
+        executorService.execute(new Runnable() {
             @Override
             public void run() {
                 contactDAO.delete(contact);
